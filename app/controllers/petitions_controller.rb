@@ -9,11 +9,11 @@ class PetitionsController < ApplicationController
   end
 
   def new
-    @petition = Petition.new
+    @petition = current_user.petitions.build
   end
 
   def create
-    @petition = Petition.new(petition_params)
+    @petition = current_user.petitions.build(petition_params)
 
     if @petition.save
       redirect_to @petition, notice: "Successfully created new Petition"

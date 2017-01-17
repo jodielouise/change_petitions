@@ -1,11 +1,11 @@
 <%= simple_form_for @petition, html: { multipart: true } do |f| %>
   <% if @petition.errors.any? %>
     <div id="errors">
-      <h2></h2>
+    <h2>
       <%= pluralize(@petition.errors.count, "error") %>
-      prevented this pin from saving
+      prevented this petition from saving</h2>
       <ul>
-        <% @pin.errors.full_messages.each do |msg| %>
+        <% @petition.errors.full_messages.each do |msg| %>
         <li>
           <%= msg %>
         </li>
@@ -18,6 +18,6 @@
   </div>
   <div class="form-group">
     <%= f.input :description, input_html: { class: 'form-control' } %>
-  </div>
   <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
 <% end %>
