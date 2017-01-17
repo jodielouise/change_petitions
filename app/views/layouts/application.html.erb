@@ -9,6 +9,27 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-brand">
+        <%= link_to "Change Petitions", root_path %>
+      </div>
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to "New petition", new_petition_path %>
+          </li>
+          <li>
+            <%= link_to "Account", edit_user_registration_path %>
+          </li>
+          <li>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
+
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, class: "alert alert-info" %>
     <% end %>
