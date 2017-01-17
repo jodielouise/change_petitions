@@ -1,0 +1,6 @@
+<%=link_to "New petition", new_petition_path%>
+<h2> petitions site</h2>
+
+<% @petitions.each do |petition| %>
+<h2><%= link_to petition.title, petition %></h2>
+<%end%>
