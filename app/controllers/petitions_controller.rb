@@ -1,5 +1,14 @@
 class PetitionsController < ApplicationController
   before_action :find_petition, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+
+  def search
+    if params[:search].present?
+      @petitions = Petition.search(params[:search])
+    else
+      @petitions = Petition.all
+    end
+  end
 
   def index
     @petitions = Petition.all.order("created_at DESC")
@@ -40,7 +49,7 @@ class PetitionsController < ApplicationController
 
   private
   def petition_params
-		params.require(:petition).permit(:title, :description)
+		params.require(:petition).permit(:title, :description, :image)
 	end
 
   def find_petition

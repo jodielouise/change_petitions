@@ -14,8 +14,9 @@
       <div class="navbar-brand">
         <%= link_to "Change Petitions", root_path %>
       </div>
+
       <% if user_signed_in? %>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-left">
           <li>
             <%= link_to "New petition", new_petition_path %>
           </li>
@@ -26,13 +27,33 @@
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
           </li>
         </ul>
+        <% else %>
+        <ul class="nav navbar-nav navbar-left">
+          <li>
+            <%= link_to "Sign Up", new_user_registration %>
+            </li>
+            <li>
+              <%= link_to "Sign In", user_session %>
+            </li>
+          </ul>
       <% end %>
+
+      <%= form_tag search_petitions_path, method: :get, class:"navbar-form navbar-right", role: "search" do %>
+        <p>
+          <%= text_field_tag :search, params[:search], class: "form-control" %>
+          <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+        </p>
+      <% end %>
+
     </div>
   </nav>
 
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: "alert alert-info" %>
-    <% end %>
-    <%= yield %>
+    <div class="container">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "alert alert-info" %>
+      <% end %>
+      <%= yield %>
+    </div>
+
   </body>
 </html>
