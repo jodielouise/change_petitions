@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     end
   end
 root "petitions#index"
-
+resources :about, only: :index
+resources :success_stories, only: :index
 end

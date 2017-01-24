@@ -18,6 +18,12 @@
       <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-left">
           <li>
+          <%= link_to "About", about_index_path %>
+          </li>
+          <li>
+          <%= link_to "Success Stories", success_stories_path %>
+          </li>
+          <li>
             <%= link_to "New petition", new_petition_path %>
           </li>
           <li>
@@ -29,6 +35,9 @@
         </ul>
         <% else %>
         <ul class="nav navbar-nav navbar-left">
+          <li>
+          <%= link_to "About", about_index_path %>
+          </li>
           <li>
             <%= link_to "Sign Up", new_user_registration_path %>
             </li>
@@ -53,7 +62,8 @@
     <%= link_to catagory.name, petitions_path(catagory: catagory.name) %>
     <% end %>
   </div>
-  
+  <br>
+
     <div class="container">
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, class: "alert alert-info" %>
