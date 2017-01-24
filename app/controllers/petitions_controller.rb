@@ -11,7 +11,12 @@ class PetitionsController < ApplicationController
   end
 
   def index
-    @petitions = Petition.all.order("created_at DESC")
+    if params[:catagory].blank?
+      @petitions = Petition.all.order("created_at DESC")
+    else
+      @catagory_id = Catagory.find_by(name: params[:catagory]).id
+      @petitions = Petition.where(Catagory_id: @catagory_id).order("created_at DESC")
+    end
   end
 
   def show
@@ -49,7 +54,7 @@ class PetitionsController < ApplicationController
 
   private
   def petition_params
-		params.require(:petition).permit(:title, :description, :image)
+		params.require(:petition).permit(:title, :description, :image, :catagory_id)
 	end
 
   def find_petition

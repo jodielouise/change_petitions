@@ -30,10 +30,10 @@
         <% else %>
         <ul class="nav navbar-nav navbar-left">
           <li>
-            <%= link_to "Sign Up", new_user_registration %>
+            <%= link_to "Sign Up", new_user_registration_path %>
             </li>
             <li>
-              <%= link_to "Sign In", user_session %>
+              <%= link_to "Sign In", new_user_session_path %>
             </li>
           </ul>
       <% end %>
@@ -48,6 +48,12 @@
     </div>
   </nav>
 
+  <div>
+    <% Catagory.all.each do |catagory| %>
+    <%= link_to catagory.name, petitions_path(catagory: catagory.name) %>
+    <% end %>
+  </div>
+  
     <div class="container">
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, class: "alert alert-info" %>
